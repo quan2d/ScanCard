@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.android.support:support-compat-24.2.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/b28daac3271ef017874d5376b67549d349c722fc/output/jars/classes.jar!/" />
-      <root url="jar://$USER_HOME$/.android/build-cache/b28daac3271ef017874d5376b67549d349c722fc/output/jars/libs/internal_impl-24.2.0.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/b28daac3271ef017874d5376b67549d349c722fc/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/9174f0b47f873e38334251d64381e43dadb06983/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/9174f0b47f873e38334251d64381e43dadb06983/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/9174f0b47f873e38334251d64381e43dadb06983/output/jars/libs/internal_impl-24.2.0.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://C:/AndroidSDK/extras/android/m2repository/com/android/support/support-compat/24.2.0/support-compat-24.2.0-javadoc.jar!/" />

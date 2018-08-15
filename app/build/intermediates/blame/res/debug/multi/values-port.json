@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "E:\\SunNet\\Projects\\Apps-Team\\Examples\\ScanCard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+        "outputFile": "F:\\QuanDD\\Android\\ScanCard\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 106
                 },
                 "from": {
-                    "file": "C:\\Users\\Do Dang Quan\\.android\\build-cache\\94ba248136172e685b62895231c82993a12b270d\\output\\res\\values-port\\values-port.xml",
+                    "file": "C:\\Users\\Do Dang Quan\\.android\\build-cache\\77eef30dbf1ff92575f7b348743a8994df2e8951\\output\\res\\values-port\\values-port.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
