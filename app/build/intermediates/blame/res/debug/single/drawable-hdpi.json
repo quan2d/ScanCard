@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "E:\\SunNet\\Projects\\Apps-Team\\Examples\\ScanCard\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\icon.png",
+        "source": "E:\\SunNet\\Projects\\Apps-Team\\Examples\\ScanCard\\app\\src\\main\\res\\drawable-hdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\SunNet\\Projects\\Apps-Team\\Examples\\ScanCard\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\light_on.png",
+        "source": "E:\\SunNet\\Projects\\Apps-Team\\Examples\\ScanCard\\app\\src\\main\\res\\drawable-hdpi\\light_on.png"
+    },
+    {
+        "merged": "E:\\SunNet\\Projects\\Apps-Team\\Examples\\ScanCard\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\light_off.png",
+        "source": "E:\\SunNet\\Projects\\Apps-Team\\Examples\\ScanCard\\app\\src\\main\\res\\drawable-hdpi\\light_off.png"
+    }
+]
