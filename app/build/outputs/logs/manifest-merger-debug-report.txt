@@ -1,122 +1,122 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:2:1-36:12
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:2:1-36:12
 	package
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:3:5-38
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:3:5-38
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
 	android:installLocation
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:4:5-35
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:4:5-35
 uses-feature#android.hardware.camera
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:6:5-60
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:6:5-60
 	android:name
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:6:19-57
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:6:19-57
 uses-permission#android.permission.CAMERA
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:7:5-65
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:7:5-65
 	android:name
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:7:22-62
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:7:22-62
 application
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:9:5-34:19
-MERGED from [com.google.android.gms:play-services-vision:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\9719c6bc40ab19a689ba1ee62d235ad908d61c7a\output\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\c3eaadad82487f442101c76e29fdc3460da35e09\output\AndroidManifest.xml:19:5-23:19
-MERGED from [com.google.android.gms:play-services-tasks:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\2727fa424cf64bfdd803fda843a1ecfc5657ad84\output\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\28f5499239ccbf28d3e9daa2664b26501edeef6f\output\AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:design:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\4add7bf1d38f670c7114c0ed8e4c47f0801ffcd6\output\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\77eef30dbf1ff92575f7b348743a8994df2e8951\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:animated-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\dab2c5d5386a847ec17542385485a39c328beb46\output\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\7e45cbb3acd2c5fefb3b504f888d711c6484326d\output\AndroidManifest.xml:23:5-20
-MERGED from [com.android.support:support-v4:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\5a06035b40528a48ed3e7e9a7d58f4a60ed9f7e2\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-fragment:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\ddc410dba783d05f4164e25e29fa11c45e0ecc20\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-utils:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\b819b35b3495a55d355b9ada4bb18d2b7c6f6b98\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-media-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\491ff83642750ec6abee1a1bab66a37e3811c834\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-core-ui:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\50e0f28e05969a02b2bdaf0f433db4ff1763d86b\output\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:support-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\9174f0b47f873e38334251d64381e43dadb06983\output\AndroidManifest.xml:25:5-20
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:9:5-34:19
+MERGED from [com.google.android.gms:play-services-vision:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\306f7cd41909ea21d5797d8dde46cd92ad57a96c\output\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\b2b0c55f8814d9d0cbed1a44d1341d3503369fe5\output\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-tasks:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\dca6b3bf46ba23ff5f7105883f1de1187a766020\output\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\8fb19d42287174771708dd385b4ced07011fa998\output\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:design:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\dc11b7895f49deda58f0e5f103b40193a424fee1\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\94ba248136172e685b62895231c82993a12b270d\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\92f4cb260741b2cd210254be6b76867f4f3dff04\output\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\5586ac99cd6adeb7c2b1b06cb95d5a170bf36861\output\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-v4:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\eac5757a07221e751f7589c934bb071ebf140ad0\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\e3ca7f8a019dd27e2953b90d6771cf0aeee80afa\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\8db7a8620b5fc208591a4deb3332a60eb0977f21\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\a7921c02c9f2e18440854f0c50f9aa071c298d17\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\495759b9315b9c3ae35b46781974a2474482a057\output\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\b28daac3271ef017874d5376b67549d349c722fc\output\AndroidManifest.xml:25:5-20
 	android:label
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:14:9-33
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:14:9-33
 	android:supportsRtl
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:15:9-37
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:15:9-37
 	android:hardwareAccelerated
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:12:9-43
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:12:9-43
 	android:fullBackupContent
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:11:9-42
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:11:9-42
 	android:allowBackup
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:10:9-35
 	android:icon
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:13:9-38
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:13:9-38
 	android:theme
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:16:9-47
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:16:9-47
 meta-data#com.google.android.gms.vision.DEPENDENCIES
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:17:9-19:35
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:17:9-19:35
 	android:value
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:19:13-32
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:19:13-32
 	android:name
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:18:13-70
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:18:13-70
 activity#utility.vision.scancard.MainActivity
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:21:9-29:20
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:21:9-29:20
 	android:label
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:23:13-56
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:23:13-56
 	android:name
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:22:13-64
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:22:13-64
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:24:13-28:29
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:24:13-28:29
 action#android.intent.action.MAIN
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:25:17-69
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:25:17-69
 	android:name
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:25:25-66
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:25:25-66
 category#android.intent.category.LAUNCHER
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:27:17-77
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:27:27-74
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:27:27-74
 activity#utility.vision.scancard.OcrCaptureActivity
-ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:31:9-33:20
+ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:31:9-33:20
 	android:label
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:32:13-56
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:32:13-56
 	android:name
-		ADDED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml:31:19-76
+		ADDED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml:31:19-76
 uses-sdk
-INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [com.google.android.gms:play-services-vision:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\9719c6bc40ab19a689ba1ee62d235ad908d61c7a\output\AndroidManifest.xml:4:5-42
-MERGED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\c3eaadad82487f442101c76e29fdc3460da35e09\output\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-tasks:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\2727fa424cf64bfdd803fda843a1ecfc5657ad84\output\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\28f5499239ccbf28d3e9daa2664b26501edeef6f\output\AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:design:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\4add7bf1d38f670c7114c0ed8e4c47f0801ffcd6\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\77eef30dbf1ff92575f7b348743a8994df2e8951\output\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:animated-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\dab2c5d5386a847ec17542385485a39c328beb46\output\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\7e45cbb3acd2c5fefb3b504f888d711c6484326d\output\AndroidManifest.xml:21:5-43
-MERGED from [com.android.support:support-v4:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\5a06035b40528a48ed3e7e9a7d58f4a60ed9f7e2\output\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\ddc410dba783d05f4164e25e29fa11c45e0ecc20\output\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-core-utils:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\b819b35b3495a55d355b9ada4bb18d2b7c6f6b98\output\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-media-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\491ff83642750ec6abee1a1bab66a37e3811c834\output\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:recyclerview-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\728885233089cfe7d60b45be37a7d02db8735044\output\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-core-ui:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\50e0f28e05969a02b2bdaf0f433db4ff1763d86b\output\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\9174f0b47f873e38334251d64381e43dadb06983\output\AndroidManifest.xml:21:5-23:58
+INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.google.android.gms:play-services-vision:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\306f7cd41909ea21d5797d8dde46cd92ad57a96c\output\AndroidManifest.xml:4:5-42
+MERGED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\b2b0c55f8814d9d0cbed1a44d1341d3503369fe5\output\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-tasks:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\dca6b3bf46ba23ff5f7105883f1de1187a766020\output\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\8fb19d42287174771708dd385b4ced07011fa998\output\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:design:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\dc11b7895f49deda58f0e5f103b40193a424fee1\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\94ba248136172e685b62895231c82993a12b270d\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\92f4cb260741b2cd210254be6b76867f4f3dff04\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\5586ac99cd6adeb7c2b1b06cb95d5a170bf36861\output\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-v4:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\eac5757a07221e751f7589c934bb071ebf140ad0\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\e3ca7f8a019dd27e2953b90d6771cf0aeee80afa\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-utils:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\8db7a8620b5fc208591a4deb3332a60eb0977f21\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-media-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\a7921c02c9f2e18440854f0c50f9aa071c298d17\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:recyclerview-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\89c9dfde266c39a69dc4d8918071d35c5d34ffc1\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-core-ui:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\495759b9315b9c3ae35b46781974a2474482a057\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\b28daac3271ef017874d5376b67549d349c722fc\output\AndroidManifest.xml:21:5-23:58
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\77eef30dbf1ff92575f7b348743a8994df2e8951\output\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:24.2.0] C:\Users\Do Dang Quan\.android\build-cache\94ba248136172e685b62895231c82993a12b270d\output\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
-		INJECTED from F:\QuanDD\Android\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
+		INJECTED from E:\SunNet\Projects\ScanCard\app\src\main\AndroidManifest.xml
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\c3eaadad82487f442101c76e29fdc3460da35e09\output\AndroidManifest.xml:20:9-22:45
+ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\b2b0c55f8814d9d0cbed1a44d1341d3503369fe5\output\AndroidManifest.xml:20:9-22:45
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\c3eaadad82487f442101c76e29fdc3460da35e09\output\AndroidManifest.xml:22:19-43
+		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\b2b0c55f8814d9d0cbed1a44d1341d3503369fe5\output\AndroidManifest.xml:22:19-43
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\c3eaadad82487f442101c76e29fdc3460da35e09\output\AndroidManifest.xml:21:19-78
+		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\b2b0c55f8814d9d0cbed1a44d1341d3503369fe5\output\AndroidManifest.xml:21:19-78
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\c3eaadad82487f442101c76e29fdc3460da35e09\output\AndroidManifest.xml:20:19-85
+		ADDED from [com.google.android.gms:play-services-base:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\b2b0c55f8814d9d0cbed1a44d1341d3503369fe5\output\AndroidManifest.xml:20:19-85
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\28f5499239ccbf28d3e9daa2664b26501edeef6f\output\AndroidManifest.xml:21:9-23:69
+ADDED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\8fb19d42287174771708dd385b4ced07011fa998\output\AndroidManifest.xml:21:9-23:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\28f5499239ccbf28d3e9daa2664b26501edeef6f\output\AndroidManifest.xml:23:13-66
+		ADDED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\8fb19d42287174771708dd385b4ced07011fa998\output\AndroidManifest.xml:23:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\28f5499239ccbf28d3e9daa2664b26501edeef6f\output\AndroidManifest.xml:22:13-58
+		ADDED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Do Dang Quan\.android\build-cache\8fb19d42287174771708dd385b4ced07011fa998\output\AndroidManifest.xml:22:13-58

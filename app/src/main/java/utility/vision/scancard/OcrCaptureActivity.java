@@ -25,6 +25,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -51,7 +53,16 @@ import utility.vision.scancard.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import static android.os.Environment.getExternalStorageDirectory;
+import static java.io.File.separator;
 
 /**
  * Activity for the multi-tracker app.  This app detects text and displays the value with the
@@ -71,12 +82,15 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     public static final String AutoFocus = "AutoFocus";
     public static final String UseFlash = "UseFlash";
     public static final String TextBlockObject = "String";
+    public static final String ImageObject = "Image";
 
     private CameraSource mCameraSource;
     private CameraSourcePreview mPreview;
     private GraphicOverlay<OcrGraphic> mGraphicOverlay;
 
-    boolean useFlash;
+    private Intent data;
+    public boolean allowDetect;
+
 
     /**
      * Initializes the UI and creates the detector pipeline.
@@ -90,8 +104,10 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
 
         // read parameters from the intent used to launch the activity.
-        boolean autoFocus = getIntent().getBooleanExtra(AutoFocus, false);
-        useFlash = getIntent().getBooleanExtra(UseFlash, false);
+        boolean autoFocus = true;
+        boolean useFlash = false;
+
+        allowDetect = true;
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -101,10 +117,6 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
-
-        Snackbar.make(mGraphicOverlay, "Tap to capture. Pinch/Stretch to zoom",
-                Snackbar.LENGTH_LONG)
-                .show();
     }
 
     /**
@@ -156,7 +168,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         // is set to receive the text recognition results and display graphics for each text block
         // on screen.
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
-        textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay));
+        textRecognizer.setProcessor(new OcrDetectorProcessor(mGraphicOverlay, this));
 
         if (!textRecognizer.isOperational()) {
             // Note: The first time that an app using a Vision API is installed on a
@@ -300,5 +312,83 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 mCameraSource = null;
             }
         }
+    }
+
+    public void captureFinished(ArrayList<String> arrText){
+
+        if (arrText != null) {
+            allowDetect = false;
+            data = new Intent();
+
+            data.putExtra(TextBlockObject, arrText);
+            Log.d(TAG, "captureFinished: text data is ok");
+            //setResult(CommonStatusCodes.SUCCESS, data);
+            //finish();
+
+            takeImage("");
+        }
+        else {
+            Log.d(TAG, "captureFinished: text data is null");
+        }
+    }
+
+    private void takeImage(final String text){
+        mCameraSource.takePicture(null, new CameraSource.PictureCallback() {
+
+            @Override
+            public void onPictureTaken(byte[] bytes) {
+                Log.d(TAG, "onPictureTaken - jpe");
+                capturePic(resizeImage(bytes));
+            }
+
+            byte[] resizeImage(byte[] input) {
+                Bitmap original = BitmapFactory.decodeByteArray(input , 0, input.length);
+                //Bitmap resized = Bitmap.createScaledBitmap(original, 100, 100, true);
+                Bitmap resized = Bitmap.createBitmap(original,0,original.getHeight()/3, original.getWidth(), original.getHeight()/3);
+
+                ByteArrayOutputStream blob = new ByteArrayOutputStream();
+                resized.compress(Bitmap.CompressFormat.JPEG, 50, blob);
+
+                return blob.toByteArray();
+            }
+
+            private void capturePic(byte[] bytes){
+                try{
+                    data.putExtra(ImageObject, bytes);
+                    setResult(CommonStatusCodes.SUCCESS, data);
+                    finish();
+                }catch(Exception ex){
+
+                }
+            }
+
+            private void capturePic(byte[] bytes, String text) {
+                try {
+                    String mainpath = getExternalStorageDirectory() + separator + "MaskIt" + separator + "images" + separator;
+                    File basePath = new File(mainpath);
+                    if (!basePath.exists())
+                        Log.d("CAPTURE_BASE_PATH", basePath.mkdirs() ? "Success": "Failed");
+                    File captureFile = new File(mainpath + "photo_" + text + "_" + getPhotoTime() + ".jpg");
+                    if (!captureFile.exists())
+                        Log.d("CAPTURE_FILE_PATH", captureFile.createNewFile() ? "Success": "Failed");
+                    FileOutputStream stream = new FileOutputStream(captureFile);
+                    stream.write(bytes);
+                    stream.flush();
+                    stream.close();
+                    Log.d(TAG, "capturePic - done - " + captureFile.getPath());
+                    data.putExtra(ImageObject, captureFile.getPath());
+                    setResult(CommonStatusCodes.SUCCESS, data);
+                    finish();
+                    //mPreview.stop();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            private String getPhotoTime(){
+                SimpleDateFormat sdf=new SimpleDateFormat("ddMMyy_hhmmss");
+                return sdf.format(new Date());
+            }
+        });
     }
 }

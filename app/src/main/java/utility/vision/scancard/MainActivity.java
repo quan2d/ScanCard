@@ -17,14 +17,19 @@
 package utility.vision.scancard;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
+
+import java.util.ArrayList;
 
 /**
  * Main activity demonstrating how to pass extra parameters to an activity that
@@ -35,6 +40,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     // Use a compound button so either checkbox or switch widgets work.
     private TextView statusMessage;
     private TextView textValue;
+    private ImageView imageView;
 
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "MainActivity";
@@ -46,6 +52,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         statusMessage = (TextView)findViewById(R.id.status_message);
         textValue = (TextView)findViewById(R.id.text_value);
+        imageView = (ImageView)findViewById(R.id.imageView);
 
         findViewById(R.id.read_text).setOnClickListener(this);
     }
@@ -92,10 +99,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if(requestCode == RC_OCR_CAPTURE) {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
-                    String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
+                    //String text = data.getStringExtra(OcrCaptureActivity.TextBlockObject);
+                    ArrayList<String> arrText = data.getStringArrayListExtra(OcrCaptureActivity.TextBlockObject);
+                    byte[] image = data.getByteArrayExtra(OcrCaptureActivity.ImageObject);
+                    Log.d(TAG, "Image read: " + image.length);
                     statusMessage.setText(R.string.ocr_success);
-                    textValue.setText(text);
-                    Log.d(TAG, "Text read: " + text);
+                    String stext = "";
+                    for(String text : arrText) {
+                        stext += text + ",";
+                    }
+                    textValue.setText(stext);
+                    Log.d(TAG, "Text read: " + stext);
+
+                    Bitmap b = BitmapFactory.decodeByteArray(image,0,image.length);
+                    imageView.setImageBitmap(b);
                 } else {
                     statusMessage.setText(R.string.ocr_failure);
                     Log.d(TAG, "No Text captured, intent data is null");

@@ -2,5 +2,9 @@
     {
         "merged": "F:\\QuanDD\\Android\\ScanCard\\app\\build\\intermediates\\res\\merged\\debug\\layout-land-v17\\activity_main.xml",
         "source": "F:\\QuanDD\\Android\\ScanCard\\app\\src\\main\\res\\layout-land-v17\\activity_main.xml"
+    },
+    {
+        "merged": "E:\\SunNet\\Projects\\ScanCard\\app\\build\\intermediates\\res\\merged\\debug\\layout-land-v17\\activity_main.xml",
+        "source": "E:\\SunNet\\Projects\\ScanCard\\app\\src\\main\\res\\layout-land-v17\\activity_main.xml"
     }
 ]

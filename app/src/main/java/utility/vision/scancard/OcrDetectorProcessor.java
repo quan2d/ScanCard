@@ -22,6 +22,8 @@ import utility.vision.scancard.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 
+import java.util.ArrayList;
+
 /**
  * A very simple Processor which receives detected TextBlocks and adds them to the overlay
  * as OcrGraphics.
@@ -29,9 +31,12 @@ import com.google.android.gms.vision.text.TextBlock;
 public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
 
     private GraphicOverlay<OcrGraphic> mGraphicOverlay;
+    private OcrCaptureActivity mParent;
+    private static final String TAG = "OcrDetectorProcessor";
 
-    OcrDetectorProcessor(GraphicOverlay<OcrGraphic> ocrGraphicOverlay) {
+    OcrDetectorProcessor(GraphicOverlay<OcrGraphic> ocrGraphicOverlay, OcrCaptureActivity parent) {
         mGraphicOverlay = ocrGraphicOverlay;
+        mParent = parent;
     }
 
     /**
@@ -45,15 +50,25 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
     public void receiveDetections(Detector.Detections<TextBlock> detections) {
         mGraphicOverlay.clear();
         String data = "";
-        SparseArray<TextBlock> items = detections.getDetectedItems();
-        for (int i = 0; i < items.size(); ++i) {
-            TextBlock item = items.valueAt(i);
-            data = isCodeNumber(item.getValue());
-            if(data.length() > 0) {
-                OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, item);
-                mGraphicOverlay.add(graphic);
-                Log.d("receiveDetections", "Text read: " + item.getValue());
+        boolean capture = false;
+        ArrayList<String> arrData = new ArrayList<>();
+
+        if(mParent.allowDetect) {
+            SparseArray<TextBlock> items = detections.getDetectedItems();
+            for (int i = 0; i < items.size(); ++i) {
+                TextBlock item = items.valueAt(i);
+                data = isCodeNumber(item.getValue());
+                if (data.length() > 0) {
+                    OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, item);
+                    mGraphicOverlay.add(graphic);
+                    arrData.add(item.getValue());
+                    Log.d("receiveDetections", "Text read: " + item.getValue());
+                }
             }
+        }
+
+        if(!arrData.isEmpty()) {
+            mParent.captureFinished(arrData);
         }
     }
 
