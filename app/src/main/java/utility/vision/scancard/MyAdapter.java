@@ -69,7 +69,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     public interface OnItemClickedListener {
-        void onItemClick(String username);
+        void onItemClick(String codeNumber);
     }
 
     private OnItemClickedListener onItemClickedListener;

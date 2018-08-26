@@ -62,23 +62,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         imageView = (ImageView)findViewById(R.id.imageView);
         mRecyclerView = (RecyclerView) findViewById(R.id.listCode);
 
-        /*
-        data = new ArrayList<>();
-        data.add("Nguyễn Minh Hưng");
-        data.add("Hoàng Minh Lợi");
-        data.add("Nguyễn Duy Bảo");
-        data.add("Nguyễn Ngọc Doanh");
-        data.add("Nguyễn Phạm Thế Hà");
-        data.add("Trần Anh Đức");
-        data.add("Trần Minh Hải");
-        mRcvAdapter = new MyAdapter(data);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mRcvAdapter);
-        */
         findViewById(R.id.read_text).setOnClickListener(this);
     }
 
@@ -132,11 +115,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     String stext = "";
                     datalist = new ArrayList<>();
                     for(String text : arrText) {
-                        stext += text + ",";
+                        //stext += text + ",";
                         datalist.add(text);
                     }
-                    textValue.setText(stext);
-                    Log.d(TAG, "Text read: " + stext);
+
 
                     mRcvAdapter = new MyAdapter(this, datalist);
 
@@ -149,6 +131,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     mRcvAdapter.setOnItemClickedListener(new MyAdapter.OnItemClickedListener() {
                         @Override
                         public void onItemClick(String codeNumber) {
+                            textValue.setText(codeNumber);
+                            Log.d(TAG, "Text read: " + codeNumber);
                             Toast.makeText(MainActivity.this, codeNumber, Toast.LENGTH_SHORT).show();
                         }
                     });
