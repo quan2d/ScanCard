@@ -74,7 +74,7 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
 
     private String isCodeNumber(String text){
         String rc = "";
-
+        //Log.d("isCodeNumber", "Text read: " + text);
         if(text.length() >= 10 && text.length() <= 30){
             rc = text.replaceAll("[^0-9]", "");
             Log.d("isCodeNumber", "Text read: " + rc);

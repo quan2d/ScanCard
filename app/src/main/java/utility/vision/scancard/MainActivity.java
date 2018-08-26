@@ -21,14 +21,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main activity demonstrating how to pass extra parameters to an activity that
@@ -41,6 +45,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private TextView textValue;
     private ImageView imageView;
 
+    RecyclerView mRecyclerView;
+    MyAdapter mRcvAdapter;
+    List<String> datalist;
+
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "MainActivity";
 
@@ -52,7 +60,25 @@ public class MainActivity extends Activity implements View.OnClickListener {
         statusMessage = (TextView)findViewById(R.id.status_message);
         textValue = (TextView)findViewById(R.id.text_value);
         imageView = (ImageView)findViewById(R.id.imageView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.listCode);
 
+        /*
+        data = new ArrayList<>();
+        data.add("Nguyễn Minh Hưng");
+        data.add("Hoàng Minh Lợi");
+        data.add("Nguyễn Duy Bảo");
+        data.add("Nguyễn Ngọc Doanh");
+        data.add("Nguyễn Phạm Thế Hà");
+        data.add("Trần Anh Đức");
+        data.add("Trần Minh Hải");
+        mRcvAdapter = new MyAdapter(data);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mRcvAdapter);
+        */
         findViewById(R.id.read_text).setOnClickListener(this);
     }
 
@@ -104,11 +130,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     Log.d(TAG, "Image read: " + image.length);
                     statusMessage.setText(R.string.ocr_success);
                     String stext = "";
+                    datalist = new ArrayList<>();
                     for(String text : arrText) {
                         stext += text + ",";
+                        datalist.add(text);
                     }
                     textValue.setText(stext);
                     Log.d(TAG, "Text read: " + stext);
+
+                    mRcvAdapter = new MyAdapter(this, datalist);
+
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setAdapter(mRcvAdapter);
+
+                    mRcvAdapter.setOnItemClickedListener(new MyAdapter.OnItemClickedListener() {
+                        @Override
+                        public void onItemClick(String codeNumber) {
+                            Toast.makeText(MainActivity.this, codeNumber, Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                     Bitmap b = BitmapFactory.decodeByteArray(image,0,image.length);
                     imageView.setImageBitmap(b);
