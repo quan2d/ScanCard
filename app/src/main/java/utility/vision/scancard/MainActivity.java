@@ -23,6 +23,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -116,11 +117,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     datalist = new ArrayList<>();
                     for(String text : arrText) {
                         //stext += text + ",";
-                        datalist.add(text);
+                        datalist.add(getCodeNumber(text));
                     }
 
-
                     mRcvAdapter = new MyAdapter(this, datalist);
+
+                    textValue.setText(codeNumberIndex(datalist));
 
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -133,7 +135,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         public void onItemClick(String codeNumber) {
                             textValue.setText(codeNumber);
                             Log.d(TAG, "Text read: " + codeNumber);
-                            Toast.makeText(MainActivity.this, codeNumber, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Copy : " + codeNumber, Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -151,5 +153,76 @@ public class MainActivity extends Activity implements View.OnClickListener {
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    protected String getCodeNumber(String text){
+        String rc = "";
+        String temp = "";
+
+        //Remove CR LF
+        temp = text.replaceAll("\\n", " ");
+        temp = temp.replaceAll("\\r", " ");
+
+        //Trim string
+        temp = temp.trim();
+
+        String [] arrTemp = temp.split(" ");
+        int i, len = arrTemp.length, idMaxLen = 0, maxLen = 0;
+
+        if(arrTemp.length > 1){
+            for(i = 0; i < len; i++){
+                //Check is digit
+                if(TextUtils.isDigitsOnly(arrTemp[i])){
+                    rc += arrTemp[i];
+                }
+
+                if(maxLen < arrTemp[i].length()){
+                    maxLen = arrTemp[i].length();
+                    idMaxLen = i;
+                }
+            }
+
+            //Re-check
+            if(rc.length() == 0){
+                //Find item has max length
+                rc = arrTemp[idMaxLen];
+            }
+        }else{
+            rc = arrTemp[0];
+        }
+
+        return rc.replaceAll("[^0-9]", "");
+    }
+
+    protected String codeNumberIndex(List<String> data){
+        int id = 0;
+
+        if(data.size() == 1){
+            id = 0;
+        }else{
+            //Viettel
+            if(data.get(0).length() == 15 && data.get(1).length() == 14){
+                id = 0;
+            }else if(data.get(0).length() == 14 && data.get(1).length() == 15){
+                id = 1;
+            }else if(data.get(0).length() == 13 && data.get(1).length() == 11){
+                id = 0;
+            }else if(data.get(0).length() == 11 && data.get(1).length() == 13){
+                id = 1;
+            //Mobile
+            }else if(data.get(0).length() == 12 && data.get(1).length() == 15){
+                id = 0;
+            }else if(data.get(0).length() == 15 && data.get(1).length() == 12){
+                id = 1;
+            //Vinaphone
+            }else if(data.get(0).length() == 12 && data.get(1).length() == 14){
+                id = 0;
+            }else if(data.get(0).length() == 14 && data.get(1).length() == 12){
+                id = 1;
+            }else{
+                id = 0;
+            }
+        }
+        return data.get(id);
     }
 }
