@@ -18,13 +18,16 @@ package utility.vision.scancard;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +37,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -104,6 +108,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.title_activity_main);
+        //builder.setIcon(R.drawable.icon);
+        builder.setMessage("Do you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
     /**
      * Handles the requesting of the call permission.  This includes
      * showing a "Snackbar" message of why the permission is needed then
@@ -134,6 +160,56 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.ok, listener)
                 .show();
+    }
+
+    /**
+     * Callback for the result from requesting permissions. This method
+     * is invoked for every call on {@link #requestPermissions(String[], int)}.
+     * <p>
+     * <strong>Note:</strong> It is possible that the permissions request interaction
+     * with the user is interrupted. In this case you will receive empty permissions
+     * and results arrays which should be treated as a cancellation.
+     * </p>
+     *
+     * @param requestCode  The request code passed in {@link #requestPermissions(String[], int)}.
+     * @param permissions  The requested permissions. Never null.
+     * @param grantResults The grant results for the corresponding permissions
+     *                     which is either {@link PackageManager#PERMISSION_GRANTED}
+     *                     or {@link PackageManager#PERMISSION_DENIED}. Never null.
+     * @see #requestPermissions(String[], int)
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode != RC_HANDLE_CALL_PERM) {
+            Log.d(TAG, "Got unexpected permission result: " + requestCode);
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }
+
+        if (requestCode == RC_HANDLE_CALL_PERM) {
+            if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d(TAG, "Call permission granted");
+                return;
+            } else {
+                Log.e(TAG, "Permission not granted: results len = " + grantResults.length +
+                        " Result code = " + (grantResults.length > 0 ? grantResults[0] : "(empty)"));
+
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //finish();
+                        moveTaskToBack(true);
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("ScanCard")
+                        .setMessage(R.string.no_call_permission)
+                        .setPositiveButton(R.string.ok, listener)
+                        .show();
+            }
+        }
     }
 
     /**
@@ -177,7 +253,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                     mRcvAdapter = new MyAdapter(this, datalist);
 
-                    textNumber.setText(codeNumberIndex(datalist));
+                    String [] temp = codeNumberIndex(datalist);
+                    textNumber.setText(temp[0]);
+
+                    mRcvAdapter.lastSelectedPosition = Integer.parseInt(temp[1]);
 
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -250,8 +329,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         return rc.replaceAll("[^0-9]", "");
     }
 
-    protected String codeNumberIndex(List<String> data){
+    protected String[] codeNumberIndex(List<String> data){
         int id = 0;
+        String [] result = {"",""};
 
         if(data.size() == 1){
             id = 0;
@@ -279,7 +359,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 id = 0;
             }
         }
-        return data.get(id);
+        result[0] = data.get(id);
+        result[1] = "" + id;
+        return result;
     }
 
     private void setClipboard(Context context, String text) {

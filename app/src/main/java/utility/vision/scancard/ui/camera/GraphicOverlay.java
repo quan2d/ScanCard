@@ -225,20 +225,20 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
                 mHeightScaleFactor = (float) canvas.getHeight() / (float) mPreviewHeight;
             }
 
-            paint.setColor(Color.GRAY);
-            paint.setStrokeWidth(4f);
+            paint.setColor(Color.WHITE);
+            paint.setStrokeWidth(6f);
 
             canvas.drawLine(p1.x * mWidthScaleFactor, p1.y * mHeightScaleFactor, p1.x * mWidthScaleFactor, p1.y * mHeightScaleFactor + 30, paint);
-            canvas.drawLine(p1.x * mWidthScaleFactor, p1.y * mHeightScaleFactor, p1.x * mWidthScaleFactor + 30, p1.y * mHeightScaleFactor, paint);
+            canvas.drawLine(p1.x * mWidthScaleFactor - 3, p1.y * mHeightScaleFactor, p1.x * mWidthScaleFactor + 30, p1.y * mHeightScaleFactor, paint);
 
             canvas.drawLine(p2.x * mWidthScaleFactor, p2.y * mHeightScaleFactor, p2.x * mWidthScaleFactor, p2.y * mHeightScaleFactor + 30, paint);
-            canvas.drawLine(p2.x * mWidthScaleFactor, p2.y * mHeightScaleFactor, p2.x * mWidthScaleFactor - 30, p2.y * mHeightScaleFactor, paint);
+            canvas.drawLine(p2.x * mWidthScaleFactor + 3, p2.y * mHeightScaleFactor, p2.x * mWidthScaleFactor - 30, p2.y * mHeightScaleFactor, paint);
 
             canvas.drawLine(p3.x * mWidthScaleFactor, p3.y * mHeightScaleFactor, p3.x * mWidthScaleFactor, p3.y * mHeightScaleFactor - 30, paint);
-            canvas.drawLine(p3.x * mWidthScaleFactor, p3.y * mHeightScaleFactor, p3.x * mWidthScaleFactor + 30, p3.y * mHeightScaleFactor, paint);
+            canvas.drawLine(p3.x * mWidthScaleFactor - 3, p3.y * mHeightScaleFactor, p3.x * mWidthScaleFactor + 30, p3.y * mHeightScaleFactor, paint);
 
             canvas.drawLine(p4.x * mWidthScaleFactor, p4.y * mHeightScaleFactor, p4.x * mWidthScaleFactor, p4.y * mHeightScaleFactor - 30, paint);
-            canvas.drawLine(p4.x * mWidthScaleFactor, p4.y * mHeightScaleFactor, p4.x * mWidthScaleFactor - 30, p4.y * mHeightScaleFactor, paint);
+            canvas.drawLine(p4.x * mWidthScaleFactor + 3, p4.y * mHeightScaleFactor, p4.x * mWidthScaleFactor - 30, p4.y * mHeightScaleFactor, paint);
 
             paint.setColor(Color.RED);
             paint.setStrokeWidth(2f);
