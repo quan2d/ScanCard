@@ -10,49 +10,72 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="utility.vision.scancard.MainActivity">
 
-    <TextView
-        android:id="@+id/status_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/ocr_header"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/read_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/read_text" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="299dp"
         android:layout_height="151dp"
-        android:layout_alignParentTop="false"
-        android:layout_below="@+id/status_message"
+        android:layout_above="@+id/text_number"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
         android:src="@drawable/thecao" />
-
-    <TextView
-        android:id="@+id/text_value"
-        android:layout_width="305dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="102dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listCode"
-        android:layout_width="299dp"
-        android:layout_height="101dp"
-        android:layout_below="@+id/imageView"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_above="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginBottom="30dp" />
+
+    <EditText
+        android:id="@+id/text_number"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageButtonCall"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:ems="10"
+        android:inputType="numberSigned" />
+
+    <EditText
+        android:id="@+id/text_prefix"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/text_number"
+        android:layout_marginLeft="5dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:text="*100*" />
+
+    <EditText
+        android:id="@+id/text_suffix"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/text_number"
+        android:layout_marginRight="5dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        android:text="#" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="70dp"
+        android:src="@android:drawable/sym_action_call" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageButtonCall"
+        android:layout_marginRight="70dp"
+        android:src="@android:drawable/ic_delete" />
 
 </RelativeLayout>

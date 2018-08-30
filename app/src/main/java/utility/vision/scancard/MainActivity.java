@@ -16,18 +16,24 @@
 
 package utility.vision.scancard;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -41,9 +47,10 @@ import java.util.List;
  */
 public class MainActivity extends Activity implements View.OnClickListener {
 
+    private static final int RC_HANDLE_CALL_PERM = 3;
     // Use a compound button so either checkbox or switch widgets work.
-    private TextView statusMessage;
-    private TextView textValue;
+    //private TextView statusMessage;
+    private EditText textNumber;
     private ImageView imageView;
 
     RecyclerView mRecyclerView;
@@ -58,12 +65,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        statusMessage = (TextView)findViewById(R.id.status_message);
-        textValue = (TextView)findViewById(R.id.text_value);
+        //statusMessage = (TextView)findViewById(R.id.status_message);
+        textNumber = (EditText) findViewById(R.id.text_number);
         imageView = (ImageView)findViewById(R.id.imageView);
         mRecyclerView = (RecyclerView) findViewById(R.id.listCode);
 
-        findViewById(R.id.read_text).setOnClickListener(this);
+        findViewById(R.id.imageButtonCancel).setOnClickListener(this);
+        findViewById(R.id.imageButtonCall).setOnClickListener(this);
+
+        Intent intent = new Intent(this, OcrCaptureActivity.class);
+
+        startActivityForResult(intent, RC_OCR_CAPTURE);
     }
 
     /**
@@ -73,12 +85,55 @@ public class MainActivity extends Activity implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.read_text) {
+        if (v.getId() == R.id.imageButtonCancel) {
             // launch Ocr capture activity.
             Intent intent = new Intent(this, OcrCaptureActivity.class);
 
             startActivityForResult(intent, RC_OCR_CAPTURE);
+
+            //startActivity(intent);
+        }else if(v.getId() == R.id.imageButtonCall){
+            Log.d(TAG, "Call: " + textNumber.getText().toString());
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", textNumber.getText().toString(), null));
+            int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+            if (rc != PackageManager.PERMISSION_GRANTED) {
+                requestCallPermission();
+            }else {
+                startActivity(intent);
+            }
         }
+    }
+
+    /**
+     * Handles the requesting of the call permission.  This includes
+     * showing a "Snackbar" message of why the permission is needed then
+     * sending the request.
+     */
+    private void requestCallPermission() {
+        Log.w(TAG, "Call permission is not granted. Requesting permission");
+
+        final String[] permissions = new String[]{Manifest.permission.CALL_PHONE};
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CALL_PHONE)) {
+            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CALL_PERM);
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,
+                        RC_HANDLE_CALL_PERM);
+            }
+        };
+
+        Snackbar.make(findViewById(R.layout.activity_main), R.string.permission_call_rationale,
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.ok, listener)
+                .show();
     }
 
     /**
@@ -112,7 +167,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     ArrayList<String> arrText = data.getStringArrayListExtra(OcrCaptureActivity.TextBlockObject);
                     byte[] image = data.getByteArrayExtra(OcrCaptureActivity.ImageObject);
                     Log.d(TAG, "Image read: " + image.length);
-                    statusMessage.setText(R.string.ocr_success);
+                    //statusMessage.setText(R.string.ocr_success);
                     String stext = "";
                     datalist = new ArrayList<>();
                     for(String text : arrText) {
@@ -122,7 +177,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
                     mRcvAdapter = new MyAdapter(this, datalist);
 
-                    textValue.setText(codeNumberIndex(datalist));
+                    textNumber.setText(codeNumberIndex(datalist));
 
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
                     layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -133,8 +188,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     mRcvAdapter.setOnItemClickedListener(new MyAdapter.OnItemClickedListener() {
                         @Override
                         public void onItemClick(String codeNumber) {
-                            textValue.setText(codeNumber);
-                            Log.d(TAG, "Text read: " + codeNumber);
+                            textNumber.setText(codeNumber);
+                            Log.d(TAG, "Copy: " + codeNumber);
+                            setClipboard(MainActivity.this, codeNumber);
                             Toast.makeText(MainActivity.this, "Copy : " + codeNumber, Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -142,12 +198,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     Bitmap b = BitmapFactory.decodeByteArray(image,0,image.length);
                     imageView.setImageBitmap(b);
                 } else {
-                    statusMessage.setText(R.string.ocr_failure);
+                    //statusMessage.setText(R.string.ocr_failure);
                     Log.d(TAG, "No Text captured, intent data is null");
                 }
             } else {
-                statusMessage.setText(String.format(getString(R.string.ocr_error),
-                        CommonStatusCodes.getStatusCodeString(resultCode)));
+                //statusMessage.setText(String.format(getString(R.string.ocr_error),
+                //        CommonStatusCodes.getStatusCodeString(resultCode)));
             }
         }
         else {
@@ -224,5 +280,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
         return data.get(id);
+    }
+
+    private void setClipboard(Context context, String text) {
+        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
+            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setText(text);
+        } else {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+            clipboard.setPrimaryClip(clip);
+        }
     }
 }

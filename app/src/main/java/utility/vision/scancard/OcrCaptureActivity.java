@@ -77,6 +77,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
     // Permission request codes need to be < 256
     private static final int RC_HANDLE_CAMERA_PERM = 2;
+    private static final int RC_HANDLE_CALL_PERM = 3;
 
     // Constants used to pass extra data in the intent
     public static final String AutoFocus = "AutoFocus";
@@ -117,6 +118,11 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         } else {
             requestCameraPermission();
         }
+
+        rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
+        if (rc != PackageManager.PERMISSION_GRANTED) {
+            requestCallPermission();
+        }
     }
 
     /**
@@ -146,6 +152,38 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         };
 
         Snackbar.make(mGraphicOverlay, R.string.permission_camera_rationale,
+                Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.ok, listener)
+                .show();
+    }
+
+    /**
+     * Handles the requesting of the call permission.  This includes
+     * showing a "Snackbar" message of why the permission is needed then
+     * sending the request.
+     */
+    private void requestCallPermission() {
+        Log.w(TAG, "Call permission is not granted. Requesting permission");
+
+        final String[] permissions = new String[]{Manifest.permission.CALL_PHONE};
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CALL_PHONE)) {
+            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CALL_PERM);
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,
+                        RC_HANDLE_CALL_PERM);
+            }
+        };
+
+        Snackbar.make(mGraphicOverlay, R.string.permission_call_rationale,
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.ok, listener)
                 .show();
