@@ -310,15 +310,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         if(arrTemp.length > 1){
             for(i = 0; i < len; i++){
-                //Check is digit
-                if(TextUtils.isDigitsOnly(arrTemp[i])){
+                if(TextUtils.isDigitsOnly(arrTemp[i])){     //Check is digit
+                    if(arrTemp[i].indexOf("1800") < 0){
+                        rc += arrTemp[i];
+                    }
+                }else if(countAlphabet(arrTemp[i]) == 1){   //May be have an character at first
                     rc += arrTemp[i];
                 }
 
                 if(maxLen < arrTemp[i].length()){
                     maxLen = arrTemp[i].length();
                     idMaxLen = i;
-                }
+                }                
             }
 
             //Re-check
@@ -330,7 +333,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
             rc = arrTemp[0];
         }
 
-        return rc.replaceAll("[^0-9]", "");
+        if(rc.charAt(0) == 't'){
+            rc = rc.replaceFirst("t", "1");
+        }else{
+            rc = rc.replaceAll("[^0-9]", "");
+        }
+
+        return rc;
     }
 
     protected String[] codeNumberIndex(List<String> data){
@@ -366,6 +375,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
         result[0] = data.get(id);
         result[1] = "" + id;
         return result;
+    }
+
+    protected int countAlphabet(String input){
+        int count = 0, len, i;
+        char ch;
+
+        len = input.length();
+
+        for(i = 0; i < len; i++){
+            ch = input.charAt(i);
+            if(ch < 48 && ch > 57){//not number
+                count++;
+            }
+        }
+
+        return count;
     }
 
     private void setClipboard(Context context, String text) {
