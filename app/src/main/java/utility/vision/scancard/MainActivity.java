@@ -22,6 +22,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -66,10 +67,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private static final int RC_OCR_CAPTURE = 9003;
     private static final String TAG = "MainActivity";
 
+    private SharedPreferences settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get from the SharedPreferences
+        settings = getApplicationContext().getSharedPreferences("scancard_profile", 0);
+        String strPrefix = settings.getString("prefix","*100*");
+        String strSuffix = settings.getString("suffix","#");
 
         //statusMessage = (TextView)findViewById(R.id.status_message);
         textNumber = (EditText) findViewById(R.id.text_number);
@@ -77,6 +85,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         textSuffix = (EditText) findViewById(R.id.text_suffix);
         imageView = (ImageView)findViewById(R.id.imageView);
         mRecyclerView = (RecyclerView) findViewById(R.id.listCode);
+
+        textPrefix.setText(strPrefix);
+        textSuffix.setText(strSuffix);
 
         findViewById(R.id.imageButtonCancel).setOnClickListener(this);
         findViewById(R.id.imageButtonCall).setOnClickListener(this);
@@ -102,6 +113,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //startActivity(intent);
         }else if(v.getId() == R.id.imageButtonCall){
             Log.d(TAG, "Call: " + textPrefix.getText().toString() + textNumber.getText().toString() + textSuffix.getText().toString());
+            //Store data
+            if(!textPrefix.getText().toString().equals("*100*")){
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("prefix", !textPrefix.getText().toString().isEmpty()?textPrefix.getText().toString():"*100*");
+                editor.putString("suffix", !textSuffix.getText().toString().isEmpty()?textSuffix.getText().toString():"#");
+
+                // Apply the edits!
+                editor.apply();
+            }
+
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", textPrefix.getText().toString() + textNumber.getText().toString() + textSuffix.getText().toString(), null));
             int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
             if (rc != PackageManager.PERMISSION_GRANTED) {

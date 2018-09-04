@@ -43,7 +43,7 @@
         android:layout_alignTop="@+id/text_number"
         android:layout_marginLeft="5dp"
         android:ems="10"
-        android:inputType="numberSigned"
+        android:inputType="text"
         android:text="*100*" />
 
     <EditText
@@ -54,7 +54,7 @@
         android:layout_alignTop="@+id/text_number"
         android:layout_marginRight="5dp"
         android:ems="10"
-        android:inputType="numberSigned"
+        android:inputType="text"
         android:text="#" />
 
     <ImageButton
