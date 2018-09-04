@@ -306,20 +306,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         if(arrTemp.length > 1){
             for(i = 0; i < len; i++){
-                if(arrTemp[i].indexOf("1800") < 0){
-                    if(TextUtils.isDigitsOnly(arrTemp[i])){     //Check is digit
-                        rc += arrTemp[i];
-                    }else if(countAlphabet(arrTemp[i]) == 1){   //May be have an character at first
+                if(TextUtils.isDigitsOnly(arrTemp[i])){     //Check is digit
+                    if(arrTemp[i].indexOf("1800") < 0){
                         rc += arrTemp[i];
                     }
-
-                    if(maxLen < arrTemp[i].length()){
-                        maxLen = arrTemp[i].length();
-                        idMaxLen = i;
-                    }
-                }else{
-                    rc += arrTemp[i].substring(0, arrTemp[i].indexOf("1800"));
+                }else if(countAlphabet(arrTemp[i]) == 1){   //May be have an character at first
+                    rc += arrTemp[i];
                 }
+
+                if(maxLen < arrTemp[i].length()){
+                    maxLen = arrTemp[i].length();
+                    idMaxLen = i;
+                }                
             }
 
             //Re-check
