@@ -55,6 +55,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     // Use a compound button so either checkbox or switch widgets work.
     //private TextView statusMessage;
     private EditText textNumber;
+    private EditText textPrefix;
+    private EditText textSuffix;
     private ImageView imageView;
 
     RecyclerView mRecyclerView;
@@ -71,6 +73,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         //statusMessage = (TextView)findViewById(R.id.status_message);
         textNumber = (EditText) findViewById(R.id.text_number);
+        textPrefix = (EditText) findViewById(R.id.text_prefix);
+        textSuffix = (EditText) findViewById(R.id.text_suffix);
         imageView = (ImageView)findViewById(R.id.imageView);
         mRecyclerView = (RecyclerView) findViewById(R.id.listCode);
 
@@ -97,8 +101,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             //startActivity(intent);
         }else if(v.getId() == R.id.imageButtonCall){
-            Log.d(TAG, "Call: " + textNumber.getText().toString());
-            Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", textNumber.getText().toString(), null));
+            Log.d(TAG, "Call: " + textPrefix.getText().toString() + textNumber.getText().toString() + textSuffix.getText().toString());
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", textPrefix.getText().toString() + textNumber.getText().toString() + textSuffix.getText().toString(), null));
             int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
             if (rc != PackageManager.PERMISSION_GRANTED) {
                 requestCallPermission();
