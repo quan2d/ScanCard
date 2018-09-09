@@ -18,7 +18,9 @@
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
-
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7136084704647401~1928016697" />
         <activity
             android:name="utility.vision.scancard.MainActivity"
             android:label="@string/title_activity_main"

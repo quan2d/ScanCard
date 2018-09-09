@@ -40,6 +40,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import com.google.android.gms.common.api.CommonStatusCodes;
 
@@ -69,6 +72,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private SharedPreferences settings;
 
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +83,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         settings = getApplicationContext().getSharedPreferences("scancard_profile", 0);
         String strPrefix = settings.getString("prefix","*100*");
         String strSuffix = settings.getString("suffix","#");
+
+        //Initialize ads
+        MobileAds.initialize(this, "ca-app-pub-7136084704647401~1928016697");
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         //statusMessage = (TextView)findViewById(R.id.status_message);
         textNumber = (EditText) findViewById(R.id.text_number);
@@ -112,16 +123,30 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             //startActivity(intent);
         }else if(v.getId() == R.id.imageButtonCall){
-            Log.d(TAG, "Call: " + textPrefix.getText().toString() + textNumber.getText().toString() + textSuffix.getText().toString());
             //Store data
-            if(!textPrefix.getText().toString().equals("*100*")){
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putString("prefix", !textPrefix.getText().toString().isEmpty()?textPrefix.getText().toString():"*100*");
-                editor.putString("suffix", !textSuffix.getText().toString().isEmpty()?textSuffix.getText().toString():"#");
-
-                // Apply the edits!
-                editor.apply();
+            SharedPreferences.Editor editor = settings.edit();
+            if(textPrefix.getText().toString().length() < 5){
+                //Do not update, and set default value
+                textPrefix.setText("*100*");
+            }else{
+                if(textPrefix.getText().toString().startsWith("*") && textPrefix.getText().toString().endsWith("*")){
+                    editor.putString("prefix", textPrefix.getText().toString());
+                }else{
+                    textPrefix.setText("*100*");
+                }
             }
+
+            if(textSuffix.getText().toString().length() == 0){
+                //Do not update, and set default value
+                textSuffix.setText("#");
+            }else{
+                editor.putString("suffix", textSuffix.getText().toString());
+            }
+
+            // Apply the edits!
+            editor.apply();
+
+            Log.d(TAG, "Call: " + textPrefix.getText().toString() + textNumber.getText().toString() + textSuffix.getText().toString());
 
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", textPrefix.getText().toString() + textNumber.getText().toString() + textSuffix.getText().toString(), null));
             int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
@@ -415,13 +440,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void setClipboard(Context context, String text) {
-        if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
-            android.text.ClipboardManager clipboard = (android.text.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboard.setText(text);
-        } else {
-            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
-            clipboard.setPrimaryClip(clip);
-        }
+        android.content.ClipboardManager clipboard = (android.content.ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", text);
+        clipboard.setPrimaryClip(clip);
     }
 }
