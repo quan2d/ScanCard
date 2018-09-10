@@ -40,6 +40,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -74,6 +76,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private AdView mAdView;
 
+    private InterstitialAd mInterstitialAd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +93,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         //statusMessage = (TextView)findViewById(R.id.status_message);
         textNumber = (EditText) findViewById(R.id.text_number);
@@ -121,6 +129,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
             startActivityForResult(intent, RC_OCR_CAPTURE);
 
+            if (mInterstitialAd.isLoaded()) {
+                mAdView.setVisibility(View.INVISIBLE);
+                mInterstitialAd.show();
+            } else {
+                Log.d(TAG, "The interstitial wasn't loaded yet.");
+            }
             //startActivity(intent);
         }else if(v.getId() == R.id.imageButtonCall){
             //Store data
@@ -174,11 +188,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+                        mAdView.setVisibility(View.VISIBLE);
                     }
                 });
         AlertDialog alert = builder.create();
         alert.show();
 
+        if (mInterstitialAd.isLoaded()) {
+            mAdView.setVisibility(View.INVISIBLE);
+            mInterstitialAd.show();
+        } else {
+            Log.d(TAG, "The interstitial wasn't loaded yet.");
+        }
     }
     /**
      * Handles the requesting of the call permission.  This includes

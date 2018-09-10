@@ -44,6 +44,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -80,8 +83,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private static final int RC_HANDLE_CALL_PERM = 3;
 
     // Constants used to pass extra data in the intent
-    public static final String AutoFocus = "AutoFocus";
-    public static final String UseFlash = "UseFlash";
+    public static final String ShowAdFull = "ShowAdFull";
     public static final String TextBlockObject = "String";
     public static final String ImageObject = "Image";
 
@@ -91,6 +93,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
     private Intent data;
     public boolean allowDetect;
+
+    private InterstitialAd mInterstitialAd;
 
 
     /**
@@ -103,6 +107,12 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<OcrGraphic>) findViewById(R.id.graphicOverlay);
+
+        //Initialize ads
+        //MobileAds.initialize(this, "ca-app-pub-7136084704647401~1928016697");
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         // read parameters from the intent used to launch the activity.
         boolean autoFocus = true;
@@ -146,6 +156,12 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
+
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        } else {
+            Log.d(TAG, "The interstitial wasn't loaded yet.");
+        }
 
     }
     /**
