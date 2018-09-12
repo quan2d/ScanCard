@@ -89,13 +89,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         String strSuffix = settings.getString("suffix","#");
 
         //Initialize ads
-        MobileAds.initialize(this, "ca-app-pub-7136084704647401~1928016697");
+        MobileAds.initialize(this, getString(R.string.ad_app_id));
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(getString(R.string.ad_unit_id_2));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         //statusMessage = (TextView)findViewById(R.id.status_message);

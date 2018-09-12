@@ -111,7 +111,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         //Initialize ads
         //MobileAds.initialize(this, "ca-app-pub-7136084704647401~1928016697");
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(getString(R.string.ad_unit_id_2));
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         // read parameters from the intent used to launch the activity.
