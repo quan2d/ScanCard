@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">Cho phép sử dụng camera để nhận diện mã thẻ</string>
+    <string name="permission_call_rationale">Cho phép gọi điện thoại để nạp thẻ tự động</string>
+    <string name="no_camera_permission">Ứng dụng không chạy khi không có quyền sử dụng camera. Ứng dụng sẽ thoát ngay bây giờ.</string>
+    <string name="no_call_permission">Ứng dụng không chạy khi không có quyền gọi điện thoại để nạp thẻ. Ứng dụng sẽ thoát ngay bây giờ.</string>
+    <string name="low_storage_error">Hết bộ nhớ, ứng dụng không thể chạy được.</string>
+    <string name="title_activity_main">Nạp thẻ</string>
+    <string name="ask_to_exit">Bạn có muốn thoát ứng dụng không?</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="ad_unit_id_1">"ca-app-pub-7136084704647401/9395443172"</string>
+    <string name="ad_unit_id_2">"ca-app-pub-7136084704647401/4502209140"</string>
+    <string name="ad_unit_id_1_test">"ca-app-pub-3940256099942544/6300978111"</string>
+    <string name="ad_unit_id_2_test">"ca-app-pub-3940256099942544/1033173712"</string>
+    <string name="ad_app_id">"ca-app-pub-7136084704647401~1928016697"</string>
+</resources>

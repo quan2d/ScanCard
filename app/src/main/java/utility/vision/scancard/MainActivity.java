@@ -178,14 +178,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(R.string.title_activity_main);
         //builder.setIcon(R.drawable.icon);
-        builder.setMessage("Do you want to exit?")
+        builder.setMessage(getString(R.string.ask_to_exit))
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                         mAdView.setVisibility(View.VISIBLE);
@@ -275,7 +275,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("ScanCard")
+                builder.setTitle(getString(R.string.title_activity_main))
                         .setMessage(R.string.no_call_permission)
                         .setPositiveButton(R.string.ok, listener)
                         .show();
@@ -363,47 +363,52 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     protected String getCodeNumber(String text){
         String rc = "";
-        String temp = "";
+        String temp = isCodeNumber(text);
 
-        //Remove CR LF
-        temp = text.replaceAll("\\n", " ");
-        temp = temp.replaceAll("\\r", " ");
+        if(temp.length() >= 11 && temp.length() <= 15){
+            rc = temp;
+        }else {
+            temp = "";
+            //Remove CR LF
+            temp = text.replaceAll("\\n", " ");
+            temp = temp.replaceAll("\\r", " ");
 
-        //Trim string
-        temp = temp.trim();
+            //Trim string
+            temp = temp.trim();
 
-        String [] arrTemp = temp.split(" ");
-        int i, len = arrTemp.length, idMaxLen = 0, maxLen = 0;
+            String[] arrTemp = temp.split(" ");
+            int i, len = arrTemp.length, idMaxLen = 0, maxLen = 0;
 
-        if(arrTemp.length > 1){
-            for(i = 0; i < len; i++){
-                if(TextUtils.isDigitsOnly(arrTemp[i])){     //Check is digit
-                    if(arrTemp[i].indexOf("1800") < 0){
+            if (arrTemp.length > 1) {
+                for (i = 0; i < len; i++) {
+                    if (TextUtils.isDigitsOnly(arrTemp[i])) {     //Check is digit
+                        if (arrTemp[i].indexOf("1800") < 0) {
+                            rc += arrTemp[i];
+                        }
+                    } else if (countAlphabet(arrTemp[i]) == 1) {   //May be have an character at first
                         rc += arrTemp[i];
                     }
-                }else if(countAlphabet(arrTemp[i]) == 1){   //May be have an character at first
-                    rc += arrTemp[i];
+
+                    if (maxLen < arrTemp[i].length()) {
+                        maxLen = arrTemp[i].length();
+                        idMaxLen = i;
+                    }
                 }
 
-                if(maxLen < arrTemp[i].length()){
-                    maxLen = arrTemp[i].length();
-                    idMaxLen = i;
-                }                
+                //Re-check
+                if (rc.length() == 0) {
+                    //Find item has max length
+                    rc = arrTemp[idMaxLen];
+                }
+            } else {
+                rc = arrTemp[0];
             }
 
-            //Re-check
-            if(rc.length() == 0){
-                //Find item has max length
-                rc = arrTemp[idMaxLen];
+            if (rc.charAt(0) == 't') {
+                rc = rc.replaceFirst("t", "1");
+            } else {
+                rc = rc.replaceAll("[^0-9]", "");
             }
-        }else{
-            rc = arrTemp[0];
-        }
-
-        if(rc.charAt(0) == 't'){
-            rc = rc.replaceFirst("t", "1");
-        }else{
-            rc = rc.replaceAll("[^0-9]", "");
         }
 
         return rc;
@@ -458,6 +463,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
 
         return count;
+    }
+
+    private String isCodeNumber(String text){
+        String rc = "";
+        //Log.d("isCodeNumber", "Text read: " + text);
+        if(text.length() >= 10 && text.length() <= 30){
+            rc = text.replaceAll("[^0-9]", "");
+            Log.d("isCodeNumber", "Text read: " + rc);
+            if(rc.length() < 10){
+                rc = "";
+            }
+        }else{
+            rc = "";
+        }
+
+        return rc;
     }
 
     private void setClipboard(Context context, String text) {

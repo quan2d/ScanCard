@@ -141,15 +141,15 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(OcrCaptureActivity.this);
         builder.setTitle(R.string.title_activity_main);
         //builder.setIcon(R.drawable.icon);
-        builder.setMessage("Do you want to exit?")
+        builder.setMessage(getString(R.string.ask_to_exit))
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //finish();
                         moveTaskToBack(true);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
@@ -360,7 +360,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("ScanCard")
+                builder.setTitle(getString(R.string.title_activity_main))
                         .setMessage(R.string.no_camera_permission)
                         .setPositiveButton(R.string.ok, listener)
                         .show();
@@ -381,7 +381,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                 };
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("ScanCard")
+                builder.setTitle(getString(R.string.title_activity_main))
                         .setMessage(R.string.no_call_permission)
                         .setPositiveButton(R.string.ok, listener)
                         .show();
